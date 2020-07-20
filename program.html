@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SAIT - Programs Task 1</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="site.css" />
+</head>
+<body>
+    <header>
+
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            <div id="taskOne" v-cloak>
+
+                <h1 class="header"> SAIT Programs</h1>
+                <p>Sort by program Priorities using the sort icon <i class="sort-icon-sm fa fa-sort-amount-asc"></i>. <br>
+                    Filter program Priority and Status using the options below
+                </p>
+
+                <div class="container row">
+                    <div class="col-lg-6">
+                        <div class="row">
+                            <h4>Priority</h4>
+                        </div>
+                        <div class="custom-control custom-radio">
+                            <input type="radio" id="pAll" name="priority" class="custom-control-input" v-bind:checked="priorityAll" v-on:click="setPriority(0)">
+                            <label class="custom-control-label" for="pAll">All</label>
+                        </div>
+                        <div class="custom-control custom-radio">
+                            <input type="radio" id="p1" name="priority" class="custom-control-input" v-bind:checked="priorityHigh" v-on:click="setPriority(1)">
+                            <label class="custom-control-label" for="p1">High = 1</label>
+                        </div>
+                        <div class="custom-control custom-radio">
+                            <input type="radio" id="p2" name="priority" class="custom-control-input" v-bind:checked="priorityMed" v-on:click="setPriority(2)">
+                            <label class="custom-control-label" for="p2">Medium = 2</label>
+                        </div>
+                        <div class="custom-control custom-radio">
+                            <input type="radio" id="p3" name="priority" class="custom-control-input" v-bind:checked="priorityLow" v-on:click="setPriority(3)">
+                            <label class="custom-control-label" for="p3">Low = 3</label>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="row">
+                            <h4>Status</h4>
+                        </div>
+                        <div class="custom-control custom-radio">
+                            <input type="radio" id="availAll" name="status" class="custom-control-input" v-bind:checked="statusAll" v-on:click="setStatus(0)">
+                            <label class="custom-control-label" for="availAll">All</label>
+                        </div>
+                        <div class="custom-control custom-radio">
+                            <input type="radio" id="avail" name="status" class="custom-control-input" v-bind:checked="statusAvail" v-on:click="setStatus(1)">
+                            <label class="custom-control-label" for="avail">Available</label>
+                        </div>
+                        <div class="custom-control custom-radio">
+                            <input type="radio" id="not-avail" name="status" class="custom-control-input" v-bind:checked="statusNotAvail" v-on:click="setStatus(2)">
+                            <label class="custom-control-label" for="not-avail">Not Available</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="container program-table">
+                    <table class="table table-bordered table-striped table-dark">
+                        <thead>
+                            <tr>
+                              <th scope="col">Program Title</th>
+                              <th scope="col">Priority (High = 1, Medium = 2, Low = 3)
+                                  <a href="#" v-on:click="togglePrioritySort()"><i class="sort-icon-lg fa fa-sort-amount-asc float-right"></i></a>
+                              </th>
+                              <th scope="col">Status</th>
+                            </tr>
+                          </thead>
+                        <tbody>
+                            <tr v-for="p in sortedProgramArr" v-show="isShownInTable(p)">
+                                <td> {{ p.title }} </td>
+                                <td> {{ p.priority }} </td>
+                                <td> {{ getStatusStr( p.status ) }} </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>  
+        </main>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script src="program.js"></script>
+</body>
+</html>

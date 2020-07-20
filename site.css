@@ -1,0 +1,46 @@
+[v-cloak] {
+    display: none
+}
+
+p {
+    color: cornflowerblue;
+    margin-bottom: 15px;
+}
+
+label {
+    color: slategrey;
+}
+
+.header {
+    margin-top: 30px;
+    margin-bottom: 20px;
+}
+
+h1, h2 {
+    color: cornflowerblue;
+    margin-bottom: 0;
+}
+
+h3, h4 {
+    color: slategrey;
+    margin-bottom: 0;
+}
+
+hr {
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+.program-table {
+    margin-top: 15px;
+}
+
+.sort-icon-sm {
+    color: cornflowerblue;
+    font-size: 18px;
+}
+
+.sort-icon-lg {
+    color: cornflowerblue;
+    font-size: 25px;
+}
