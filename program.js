@@ -71,7 +71,7 @@ new Vue({
         ]
     },
 
-    mounted: () => {
+    mounted: function() {
         // ****************************************************************
         // INIT
         // all needed html-bounded data members are initialized here
