@@ -9,7 +9,7 @@ The application may not work on older browsers, if there are issues please try u
 To run this browser application download all the repo files and open the program.html file using a browser.
 
 ## Task 2: Wage Calculator
-To run this browser application download all the repo files and open the wage.html file using a browser. There were some validations and edge case that were left unfinished due to time.
+To run this browser application download all the repo files and open the wage.html file using a browser.
 
 ## Task 3: Broken Page
-Not completed.
+Fixed some of the html and css differences. To run navigate to task3 folder and open index.html using a browser.
