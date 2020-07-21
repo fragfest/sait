@@ -39,6 +39,42 @@ new Vue({
     // functions called from html can be found here
     // ****************************************************************
     methods: {
+
+        daysInput: function(){
+            const maxDays = 7;
+            const days = this.convertToPositiveInt(this.daysPerWeek);
+            if(days === 0){
+                return this.resetResults();
+            }
+            this.daysPerWeek = days < maxDays ? days : maxDays;
+            this.calculate();
+        },
+
+        hoursInput: function(){
+            const maxHoursPerWeek = 168;
+            const hours = this.convertToPositiveInt(this.hoursPerWeek);
+            if(hours === 0){
+                return this.resetResults();
+            }
+            this.hoursPerWeek = hours < maxHoursPerWeek ? hours : maxHoursPerWeek;
+            this.calculate();
+        },
+
+        salaryInput: function(){
+            this.salary = this.convertToPositiveInt(this.salary);
+            if(this.salary === 0){
+                return this.resetResults();
+            }
+            this.calculate();
+        },
+
+        vacationInput: function(){
+            const maxVacations = 365;
+            const vacations = this.convertToPositiveInt(this.vacationsPerYear);
+            this.vacationsPerYear = vacations < maxVacations ? vacations : maxVacations;
+            this.calculate();
+        },
+
         calculate: function(){
             const weeksPerYear = this.weeksPerYear;
             const monthsPerYear = this.monthsPerYear;
@@ -52,6 +88,9 @@ new Vue({
 
             const vacationAnnual = salaryDaily * vacationsPerYear;
             const salaryNet = salaryAnnual - vacationAnnual;
+            if(salaryNet <= 0){
+                return this.resetResults();
+            }
 
             this.resultAnnual = Math.round(salaryNet) || 0;
             this.resultMonthly = Math.round(salaryNet / monthsPerYear) || 0;
@@ -59,13 +98,13 @@ new Vue({
             this.resultHourly = ( ((salaryNet / weeksPerYear) / hoursPerWeek) || 0).toFixed(2);
         },
 
+        convertToPositiveInt: function(input){
+            return Math.abs( parseInt(input) ) || 0;
+        },
+
         calcResults: function() {
             const weeksPerYear = this.weeksPerYear;
             const monthsPerYear = this.monthsPerYear;
-
-            //TODO validate user input values:
-            // - no negative numbers
-            // - per period numbers can not exceed the max period length i.e. only 7 days in a week
 
             switch(this.period){
                 case "hourly":
@@ -91,7 +130,14 @@ new Vue({
                 default:
                     throw new Error("unknown salary period");
             }
-        }
+        },
+
+        resetResults: function(){
+            this.resultAnnual = 0;
+            this.resultMonthly = 0;
+            this.resultWeekly = 0;
+            this.resultHourly = 0;
+        },
     }
 
 });
