@@ -16,7 +16,11 @@ new Vue({
             "weekly",
             "hourly"
         ],
+        // holidays and vacations added together can not exceed 365 days
+        maxDaysOff: 365,
+        holidaysPerYear: 10,
         vacationsPerYear: 10,
+
         hoursPerWeek: 40,
         daysPerWeek: 5,
 
@@ -69,9 +73,16 @@ new Vue({
         },
 
         vacationInput: function(){
-            const maxVacations = 365;
+            const maxVacations = this.maxDaysOff - this.holidaysPerYear;
             const vacations = this.convertToPositiveInt(this.vacationsPerYear);
             this.vacationsPerYear = vacations < maxVacations ? vacations : maxVacations;
+            this.calculate();
+        },
+
+        holidayInput: function(){
+            const maxHolidays = this.maxDaysOff - this.vacationsPerYear;
+            const holidays = this.convertToPositiveInt(this.holidaysPerYear);
+            this.holidaysPerYear = holidays < maxHolidays ? holidays : maxHolidays;
             this.calculate();
         },
 
@@ -79,15 +90,15 @@ new Vue({
             const weeksPerYear = this.weeksPerYear;
             const monthsPerYear = this.monthsPerYear;
 
-            const vacationsPerYear = this.vacationsPerYear;
+            const vacationsHolidaysPerYear = this.vacationsPerYear + this.holidaysPerYear;
             const hoursPerWeek = this.hoursPerWeek;
 
             const resultObj = this.calcResults();
             const salaryAnnual = resultObj.annual;
             const salaryDaily = resultObj.daily;
 
-            const vacationAnnual = salaryDaily * vacationsPerYear;
-            const salaryNet = salaryAnnual - vacationAnnual;
+            const vacationsHolidaysAnnual = salaryDaily * vacationsHolidaysPerYear;
+            const salaryNet = salaryAnnual - vacationsHolidaysAnnual;
             if(salaryNet <= 0){
                 return this.resetResults();
             }

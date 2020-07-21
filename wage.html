@@ -51,9 +51,17 @@
                     <div class="row col-lg-12">
                         <div class="input-group">
                             <div class="input-group-prepend">
-                                <span class="input-group-text">Vacation / year</span>
+                                <span class="input-group-text">Vacations / year</span>
                             </div>
                             <input type="number" class="form-control" v-model="vacationsPerYear"  min="0" v-on:input="vacationInput">
+                        </div>
+                    </div>
+                    <div class="row col-lg-12">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">Holidays / year</span>
+                            </div>
+                            <input type="number" class="form-control" v-model="holidaysPerYear"  min="0" v-on:input="holidayInput">
                         </div>
                     </div>
                 </div>
@@ -61,7 +69,7 @@
                 <hr>
                 <div class="container">
                     <div class="row col-lg-12">
-                        <h3>Salary adjusted for vacations</h3>
+                        <h3>Salary adjusted for vacations/holidays</h3>
                     </div>
                     <p>Annual $ {{ resultAnnual }}</p>
                     <p>Monthly $ {{ resultMonthly }}</p>
